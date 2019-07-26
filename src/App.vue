@@ -3,7 +3,8 @@
    <div v-if="events && events.length">
     <div v-for="event of events" :key="event.id">
       <p><strong>{{event.event_name}}</strong></p>
-      
+       <p><strong>Loading....</strong></p>
+        <event-gallery></event-gallery>
     </div>
   </div>
      <div>
@@ -21,7 +22,10 @@
 
 <script>
 
+
+
 import VueGallery from 'vue-gallery'
+import EventGallery from './components/EventGallery'
 import axios from 'axios'
   
 export default {
@@ -40,13 +44,14 @@ export default {
   },
   components: {
     'gallery': VueGallery,
+    'event-gallery':EventGallery,
   },// Fetches posts when the component is created.
   created() {
     axios.get(`http://127.0.0.1:8000/api/events`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.events = response.data;
-      
+
     })
     .catch(e => {
       this.errors.push(e)
@@ -60,6 +65,9 @@ export default {
     // } catch (e) {
     //   this.errors.push(e)
     // }
+  },
+  mounted () {
+    
   }
 }
 </script>
