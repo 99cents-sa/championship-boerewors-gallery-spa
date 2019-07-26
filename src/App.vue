@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-   
+   <div v-if="events && events.length">
+    <div v-for="event of events" :key="event.id">
+      <p><strong>{{event.event_name}}</strong></p>
+      
+    </div>
+  </div>
      <div>
     <gallery :images="images" :index="index" @close="index = null"></gallery>
     <div
@@ -15,8 +20,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 import VueGallery from 'vue-gallery'
+import axios from 'axios'
   
 export default {
   name: 'app',
@@ -28,12 +34,32 @@ export default {
           'https://dummyimage.com/600/000000/ffffff',
           'https://dummyimage.com/600/000000/ffffff',
         ],
+        events:[],
         index: null
       }
   },
   components: {
-    HelloWorld,
     'gallery': VueGallery,
+  },// Fetches posts when the component is created.
+  created() {
+    axios.get(`http://127.0.0.1:8000/api/events`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.events = response.data;
+      
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+    // async / await version (created() becomes async created())
+    //
+    // try {
+    //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
+    //   this.posts = response.data
+    // } catch (e) {
+    //   this.errors.push(e)
+    // }
   }
 }
 </script>
