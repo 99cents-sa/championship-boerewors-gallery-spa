@@ -1,10 +1,11 @@
 <template>
-<div>Gallery goes here</div>
+ <div>
+   <h3>{{title}}</h3>
+ </div>
 </template>
 
 <script>
 
-  
 export default {
   name: 'EventGallery',
   props: {

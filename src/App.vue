@@ -2,29 +2,15 @@
   <div id="app">
    <div v-if="events && events.length">
     <div v-for="event of events" :key="event.id">
-      <p><strong>{{event.event_name}}</strong></p>
-       <p><strong>Loading....</strong></p>
-        <event-gallery></event-gallery>
+        <event-gallery :title="event.event_name"></event-gallery>
     </div>
   </div>
-     <div>
-    <gallery :images="images" :index="index" @close="index = null"></gallery>
-    <div
-      class="image"
-      v-for="(image, imageIndex) in images"
-      :key="imageIndex"
-      @click="index = imageIndex"
-      :style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
-    ></div>
-  </div>
+    
   </div>
 </template>
 
 <script>
 
-
-
-import VueGallery from 'vue-gallery'
 import EventGallery from './components/EventGallery'
 import axios from 'axios'
   
@@ -32,18 +18,10 @@ export default {
   name: 'app',
   data() {
     return {
-        images: [
-          'https://dummyimage.com/600/ffffff/000000',
-          'https://dummyimage.com/600/ffffff/000000',
-          'https://dummyimage.com/600/000000/ffffff',
-          'https://dummyimage.com/600/000000/ffffff',
-        ],
         events:[],
-        index: null
       }
   },
   components: {
-    'gallery': VueGallery,
     'event-gallery':EventGallery,
   },// Fetches posts when the component is created.
   created() {
@@ -52,12 +30,12 @@ export default {
   .then(response => {
     this.events = response.data;
     this.events.forEach((item) => {
-      console.log("found: ", item)
-      console.log("found id: ", item.id)
+      //console.log("found: ", item)
+      //console.log("found id: ", item.id)
        let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`
         axios.get(url).
         then(response => {
-        console.log(response.data)
+        //console.log(response.data)
       })
     });
   })
