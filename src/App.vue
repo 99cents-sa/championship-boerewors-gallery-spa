@@ -1,11 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app"  class="row cf">
    <div v-if="events && events.length">
     <div v-for="event of events" :key="event.id">
-        <event-gallery :title="event.event_name" :gallery="event.gallery"></event-gallery>
+        <event-gallery :title="event.event_name"></event-gallery>
     </div>
   </div>
-    
   </div>
 </template>
 
@@ -60,16 +59,17 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
- .image {
-    float: left;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: 1px solid #ebebeb;
-    margin: 5px;
-  }
+
+.row {
+  display: -webkit-flex; /* Children instantly become flex items */
+  -webkit-flex-direction: row; /* row - default, row-reverse, column, column-reverse  */
+  -webkit-justify-content: space-between; /* space-between, flex-end, center  */
+  -webkit-flex-wrap: wrap; /*  */
+  width: 960px;
+  margin: 0 auto;
+}
+
 </style>
