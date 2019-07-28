@@ -47,16 +47,21 @@ export default {
     'event-gallery':EventGallery,
   },// Fetches posts when the component is created.
   created() {
-    axios.get(`http://127.0.0.1:8000/api/events`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.events = response.data;
 
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-
+  axios.get(`http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events`)
+  .then(response => {
+    this.data = response.data;
+    this.data.forEach((event) => {
+      console.log("found: ", event)
+      console.log("found id: ", event.id)
+       let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${event.id}`
+        axios.get(url).
+        then(response => {
+        console.log(response.data)
+      })
+    });
+  })
+  
     // async / await version (created() becomes async created())
     //
     // try {
