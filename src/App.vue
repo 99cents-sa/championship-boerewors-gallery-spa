@@ -2,7 +2,7 @@
   <div id="app">
    <div v-if="events && events.length">
     <div v-for="event of events" :key="event.id">
-        <event-gallery :title="event.event_name"></event-gallery>
+        <event-gallery :title="event.event_name" :gallery="event.gallery"></event-gallery>
     </div>
   </div>
     
@@ -13,7 +13,7 @@
 
 import EventGallery from './components/EventGallery'
 import axios from 'axios'
-  
+ 
 export default {
   name: 'app',
   data() {
@@ -35,7 +35,7 @@ export default {
        let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`
         axios.get(url).
         then(response => {
-        //console.log(response.data)
+        console.log(response.data)
       })
     });
   })
