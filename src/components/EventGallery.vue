@@ -43,7 +43,7 @@ export default {
   },
   props: {
     title: String,
-    gallery: Array,
+    gallery: String,
   },
   components: {
     EventImage,
@@ -55,7 +55,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .swiper-slide{
   display: flex;
   justify-content: center;

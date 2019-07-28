@@ -6,10 +6,7 @@
     export default {
       name: 'EventImage',
       props : [
-        'image',
-        'title',
-        'description',
-        'duration'
+        'image'
       ],
     }
     </script>
