@@ -50,11 +50,11 @@ export default {
 
   axios.get(`http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events`)
   .then(response => {
-    this.data = response.data;
-    this.data.forEach((event) => {
-      console.log("found: ", event)
-      console.log("found id: ", event.id)
-       let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${event.id}`
+    this.events = response.data;
+    this.events.forEach((item) => {
+      console.log("found: ", item)
+      console.log("found id: ", item.id)
+       let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`
         axios.get(url).
         then(response => {
         console.log(response.data)
