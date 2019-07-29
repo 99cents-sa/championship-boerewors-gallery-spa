@@ -2,7 +2,7 @@
   <div id="app" class="main-container">
     <div class="flex-container">
       <div v-for="(event, eIndex) in events.gallery" :key="event.name">
-        <h3>{{ event.name }}</h3>
+        <h3  v-if="event.items.length">{{ event.name }}</h3>
         <div class="event-container">
           <img class="image" v-for="(image, i) in event.items" :src="image.filename" :key="i" @click="index = i; eventIndex = eIndex">
         </div>
