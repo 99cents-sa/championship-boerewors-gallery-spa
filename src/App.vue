@@ -1,11 +1,16 @@
 <template>
-  <div id="app">
+  <div id="app" class="main-container">
+    <div class="flex-container">
     <div v-for="event in events.gallery" :key="event.name">
       {{/* event.name */}}
       {{/* event.items */}}  
       <h3>{{ event.name }}</h3>
-       <img class="image" v-for="(image, i) in event.items" :src="'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + image.filename " :key="i" @click="index = i">
+      <div class="event-container">
+          <img class="image" v-for="(image, i) in event.items" :src="'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + image.filename " :key="i" @click="index = i">
+      </div>
+     
   <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
+  </div>
   </div>
 
   </div>
@@ -13,7 +18,6 @@
 
 <script>
 
-import EventGallery from './components/EventGallery'
 import VueGallerySlideshow from 'vue-gallery-slideshow';
 import axios from 'axios'
  
@@ -40,8 +44,7 @@ export default {
       }
   },
   components: {
-    'event-gallery':EventGallery,
-     VueGallerySlideshow,
+ VueGallerySlideshow,
   },// Fetches posts when the component is created.
   mounted() {
 
@@ -82,14 +85,25 @@ export default {
 
 .image {
   border-radius: 5%;
+  margin-right: 4rem;
 }
-.row {
-  display: -webkit-flex; /* Children instantly become flex items */
-  -webkit-flex-direction: row; /* row - default, row-reverse, column, column-reverse  */
-  -webkit-justify-content: space-between; /* space-between, flex-end, center  */
-  -webkit-flex-wrap: wrap; /*  */
-  width: 960px;
-  margin: 0 auto;
+.flex-container {
+  display: flex;
+  justify-content: center;    /* Add this */
+  flex-direction: column;
 }
+
+.main-container {
+  display: flex;
+  justify-content: center;  
+}
+
+.event-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
 
 </style>
