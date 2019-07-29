@@ -43,7 +43,7 @@ export default {
   },
   props: {
     title: String,
-    gallery: String,
+    gallery: Array,
   },
   components: {
     EventImage,

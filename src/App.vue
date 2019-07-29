@@ -1,9 +1,8 @@
 <template>
   <div id="app"  class="row cf">
-   <div v-if="events && events.length">
-    <div v-for="event of events" :key="event.id">
-        <event-gallery :title="event.event_name"></event-gallery>
-    </div>
+
+    <div v-for="event in events">
+      {{event}}
   </div>
   </div>
 </template>
@@ -17,24 +16,29 @@ export default {
   name: 'app',
   data() {
     return {
-        events:[],
+        events:{
+          gallery:[],
+        },
       }
   },
   components: {
     'event-gallery':EventGallery,
   },// Fetches posts when the component is created.
-  created() {
+  mounted() {
 
   axios.get(`http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events`)
   .then(response => {
-    this.events = response.data;
-    this.events.forEach((item) => {
-      //console.log("found: ", item)
+
+    response.data.forEach((item) => {
+      console.log("found: ", item)
       //console.log("found id: ", item.id)
        let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`
         axios.get(url).
         then(response => {
-        console.log(response.data)
+        //console.log("found: ", item.event_name);
+        console.log(this.events.gallery);
+        this.events.gallery.push(response.data);
+        
       })
     });
   })
@@ -48,9 +52,6 @@ export default {
     //   this.errors.push(e)
     // }
   },
-  mounted () {
-    
-  }
 }
 </script>
 
