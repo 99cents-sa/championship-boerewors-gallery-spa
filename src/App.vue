@@ -2,8 +2,8 @@
   <div id="app" class="container">
     
       <div v-for="(event, eIndex) in events.gallery" :key="event.name">
-        <h3  v-if="event.items.length">{{ event.name }}</h3>
-        <div class="event-container">
+        <h3 v-if="event.items.length">{{ event.name }}</h3>
+        <div v-if="event.items.length" class="event-container">
           <img class="image" v-for="(image, i) in event.items" :src="image.filename" :key="i" @click="index = i; eventIndex = eIndex">
         </div>
         <vue-gallery-slideshow :images="events.gallery[eventIndex].items.map((_item) => {return _item.filename})" :index="index" @close="index = null"></vue-gallery-slideshow>
