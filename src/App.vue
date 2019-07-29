@@ -1,15 +1,20 @@
 <template>
-  <div id="app"  class="row cf">
-
-    <div v-for="event in events">
-      {{event}}
+  <div id="app">
+    <div v-for="event in events.gallery" :key="event.name">
+      {{/* event.name */}}
+      {{/* event.items */}}  
+      <h3>{{ event.name }}</h3>
+       <img class="image" v-for="(image, i) in event.items" :src="'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + image.filename " :key="i" @click="index = i">
+  <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
   </div>
+
   </div>
 </template>
 
 <script>
 
 import EventGallery from './components/EventGallery'
+import VueGallerySlideshow from 'vue-gallery-slideshow';
 import axios from 'axios'
  
 export default {
@@ -19,10 +24,24 @@ export default {
         events:{
           gallery:[],
         },
+      images: [
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600',
+      'http://via.placeholder.com/600x600'
+    ],
+    index: null
       }
   },
   components: {
     'event-gallery':EventGallery,
+     VueGallerySlideshow,
   },// Fetches posts when the component is created.
   mounted() {
 
@@ -30,15 +49,12 @@ export default {
   .then(response => {
 
     response.data.forEach((item) => {
-      console.log("found: ", item)
-      //console.log("found id: ", item.id)
+      let galleryItem = {name: item.event_name, items: []};
        let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`
         axios.get(url).
         then(response => {
-        //console.log("found: ", item.event_name);
-        console.log(this.events.gallery);
-        this.events.gallery.push(response.data);
-        
+        galleryItem.items = response.data;
+        this.events.gallery.push(galleryItem);
       })
     });
   })
@@ -64,6 +80,9 @@ export default {
   margin-top: 60px;
 }
 
+.image {
+  border-radius: 5%;
+}
 .row {
   display: -webkit-flex; /* Children instantly become flex items */
   -webkit-flex-direction: row; /* row - default, row-reverse, column, column-reverse  */
