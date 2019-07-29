@@ -8,7 +8,10 @@
       <div class="event-container">
           <img class="image" v-for="(image, i) in event.items" :src="'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + image.filename " :key="i" @click="index = i">
       </div>
-     
+
+    
+  
+  <div v-for="(value, i) in event.items" :key="i">{{ value.filename }}</div>
   <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
   </div>
   </div>
@@ -27,6 +30,7 @@ export default {
     return {
         events:{
           gallery:[],
+
         },
       images: [
       'http://via.placeholder.com/600x600',
@@ -57,6 +61,7 @@ export default {
         axios.get(url).
         then(response => {
         galleryItem.items = response.data;
+        //console.log(galleryItem.items[0].filename);
         this.events.gallery.push(galleryItem);
       })
     });
