@@ -85,7 +85,9 @@ export default {
 
 .image {
   border-radius: 5%;
-  margin-right: 4rem;
+  margin-right: 1rem;
+  width: 15%;
+  margin-bottom: 2%;
 }
 .flex-container {
   display: flex;
@@ -101,6 +103,8 @@ export default {
 .event-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+
 }
 
 
