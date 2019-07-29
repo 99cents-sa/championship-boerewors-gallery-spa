@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="main-container">
-    <div class="flex-container">
+  <div id="app" class="container">
+    
       <div v-for="(event, eIndex) in events.gallery" :key="event.name">
         <h3  v-if="event.items.length">{{ event.name }}</h3>
         <div class="event-container">
@@ -8,7 +8,7 @@
         </div>
         <vue-gallery-slideshow :images="events.gallery[eventIndex].items.map((_item) => {return _item.filename})" :index="index" @close="index = null"></vue-gallery-slideshow>
       </div>
-    </div>
+    
   </div>
 </template>
 <script>
@@ -75,16 +75,19 @@
     margin-bottom: 2%;
   }
 
-  .flex-container {
+  
+ .container {
+    max-width: 1000px;
+    min-height: 100%;
+    margin: auto;
     display: flex;
-    justify-content: center; /* Add this */
     flex-direction: column;
-  }
+    justify-content: space-between;
+}
 
-  .main-container {
-    display: flex;
-    justify-content: center;
-  }
+.container > * {
+    padding: 0 20px;
+}
 
   .event-container {
     display: flex;
