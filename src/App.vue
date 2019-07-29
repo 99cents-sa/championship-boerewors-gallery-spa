@@ -68,14 +68,7 @@
     margin-top: 60px;
   }
 
-  .image {
-    border-radius: 5%;
-    margin-right: 1rem;
-    width: 15%;
-    margin-bottom: 2%;
-  }
-
-  
+ 
  .container {
     max-width: 1000px;
     min-height: 100%;
@@ -89,10 +82,27 @@
     padding: 0 20px;
 }
 
-  .event-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 
-  }
+
+  .event-container {
+    overflow: visible;
+    display: block;
+    height: 100px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: inline-block;
+    float: none;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+
+
 </style>
