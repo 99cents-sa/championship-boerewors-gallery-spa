@@ -84,7 +84,7 @@
 
 
 
-  .event-container {
+.event-container {
     overflow: visible;
     display: block;
     height: 100px;
