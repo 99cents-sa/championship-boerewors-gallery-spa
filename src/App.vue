@@ -1,19 +1,20 @@
 <template>
   <div id="app" class="container">
-    
-      <div v-for="(event, eIndex) in events.gallery" :key="event.name">
-        <h3 v-if="event.items.length">{{ event.name }}</h3>
-        <div v-if="event.items.length" class="event-container">
-          <img class="image" v-for="(image, i) in event.items" :src="image.filename" :key="i" @click="index = i; eventIndex = eIndex">
+    <div v-for="(event, eIndex) in events.gallery" :key="event.name">
+      <div class="gallery-header" v-if="event.items.length"><h3 >{{ event.name }}</h3><div class="view-all" @click="index = 0; eventIndex = eIndex">View all ({{event.items.length}})</div></div>
+      <div v-if="event.items.length" class="event-container">
+        <div class="image-container" v-for="(image, i) in event.items.slice(0,maxItems)" :key="i" @click="index = i; eventIndex = eIndex">
+          <img class="image" :src="image.filename">
         </div>
-        <vue-gallery-slideshow :images="events.gallery[eventIndex].items.map((_item) => {return _item.filename})" :index="index" @close="index = null"></vue-gallery-slideshow>
       </div>
-    
+      <vue-gallery-slideshow :images="events.gallery[eventIndex].items.map((_item) => {return _item.filename})" :index="index" @close="index = null"></vue-gallery-slideshow>
+    </div>
   </div>
 </template>
 <script>
   import VueGallerySlideshow from 'vue-gallery-slideshow';
   import axios from 'axios'
+  /* eslint-disable */
 
   export default {
     name: 'app',
@@ -23,86 +24,91 @@
           gallery: []
         },
         index: null,
-        eventIndex: 0
+        eventIndex: 0,
+        maxItems: 6
       }
     },
     components: {
       VueGallerySlideshow,
-    },// Fetches posts when the component is created.
+    },
+
+    created() {
+      this.maxItems = Modernizr && Modernizr.touchevents && Modernizr.mq('(max-width: 460px)') ? 2 : 6;
+    },
     mounted() {
-
       axios.get(`http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events`)
-          .then(response => {
-
-            response.data.forEach((item) => {
-              let galleryItem = {name: item.event_name, items: []};
-              let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`;
-              axios.get(url).then(response => {
-                galleryItem.items = response.data.map((_entry) => {
-                  _entry.filename = 'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + _entry.filename;
-                  return _entry
-                });
-                //console.log(galleryItem.items[0].filename);
-                this.events.gallery.push(galleryItem);
-              })
+      .then(response => {
+        response.data.forEach((item) => {
+          let galleryItem = {name: item.event_name, items: []};
+          let url = `http://ec2-54-161-60-4.compute-1.amazonaws.com/api/events/${item.id}`;
+          axios.get(url).then(response => {
+            galleryItem.items = response.data.map((_entry) => {
+              _entry.filename = 'http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/' + _entry.filename;
+              return _entry
             });
+            this.events.gallery.push(galleryItem);
           })
-
-      // async / await version (created() becomes async created())
-      //
-      // try {
-      //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
-      //   this.posts = response.data
-      // } catch (e) {
-      //   this.errors.push(e)
-      // }
+        });
+      })
     },
   }
 </script>
-<style>
+<style lang="less">
+  @smart-phone: ~'only screen and (max-width: 767px)';
+
+  body, html {
+    padding: 0;
+    margin: 0;
+  }
+
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    margin-top: 60px;
   }
 
- 
- .container {
-    max-width: 1000px;
-    min-height: 100%;
-    margin: auto;
+  .view-all {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .gallery-header {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-}
+    align-items: center;
+  }
 
-.container > * {
-    padding: 0 20px;
-}
+  .container {
+    max-width: 1280px;
+    margin: auto;
+    padding: 0 30px;
+
+    @media @smart-phone {
+        padding: 0 20px;
+    }
+  }
 
 
+  .event-container {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.event-container {
-    overflow: visible;
-    display: block;
-    height: 100px;
-    white-space: nowrap;
+  .image-container {
+    width: 15.5%;
+
+    @media @smart-phone {
+      width: 48%;
+    }
+  }
+
+  .image {
+    height: 100%;
     width: 100%;
-}
-
-.image {
-    width: 100px;
-    height: 100px;
     object-fit: cover;
-    display: inline-block;
-    float: none;
-    margin-right: 20px;
+    object-position: center;
     cursor: pointer;
     border-radius: 8px;
-}
-
-
-
+  }
 </style>
