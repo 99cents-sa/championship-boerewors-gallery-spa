@@ -4171,9 +4171,9 @@ less-loader@^4.1.0:
     loader-utils "^1.1.0"
     pify "^3.0.0"
 
-less@^3.0.4:
-  version "3.9.0"
-  resolved "http://localhost:4873/less/-/less-3.9.0.tgz#b7511c43f37cf57dc87dffd9883ec121289b1474"
+less@^3.9.0:
+  version "3.10.3"
+  resolved "http://localhost:4873/less/-/less-3.10.3.tgz#417a0975d5eeecc52cff4bcfa3c09d35781e6792"
   dependencies:
     clone "^2.1.2"
   optionalDependencies:
@@ -6964,6 +6964,10 @@ vue-template-compiler@^2.6.10:
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
+
+vue2-filters@^0.7.0:
+  version "0.7.2"
+  resolved "http://localhost:4873/vue2-filters/-/vue2-filters-0.7.2.tgz#762e8b24c9ccaa152ac43b06c21c3e41ed6c13eb"
 
 vue@^2.0.0, vue@^2.6.10:
   version "2.6.10"
