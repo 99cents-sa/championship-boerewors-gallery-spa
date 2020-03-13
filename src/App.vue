@@ -54,6 +54,13 @@
             "created_at": "2019-08-07 07:24:30",
             "updated_at": "2019-08-07 09:06:57",
             "event_description": "South Africa’s 2018 Championship Boerewors competition awarded Yvonne Blaauw from Wellington the grand prize of a brand-new Toyota Hilux DC 2.8 GD-6 Raised Body Raider worth over R500 000. The other finalists crowned during the 26th instalment of the competition were Jean Drotsky from Pretoria and Bobby Hassen from Randgate, who shared their amazing recipes with the judges."
+          },
+          {
+            "id": 13,
+            "event_name": "2019",
+            "created_at": "2019-08-07 07:24:30",
+            "updated_at": "2019-08-07 09:06:57",
+            "event_description": "South Africa’s 2019 Championship Boerewors competition awarded second time winner Olivier Kritzinger the title of SA’s No.1 Boerewors Champion. Kritzinger walked away with prizes worth more than R500 000, including a brand-new Toyota Fortuner 2.4 GD-6 4X4 6AT.  Other finalists crowned during the 27th installment of the competition was last year’s winner, Yvonne Blaauw from Wellington in second place and Jimmy Steenberg, from Despatch in the Eastern Cape, in third place."
           }
         ],
         eventsHardCode: []
@@ -673,12 +680,86 @@
           "updated_at": "2019-08-07 07:28:06"
         }
       ];
+      this.eventsHardCode[3] = [
+        {
+          "id": 76,
+
+        },
+        {
+          "id": 77,
+
+        },
+        {
+          "id": 78,
+
+        },
+        {
+          "id": 79,
+
+        },
+        {
+          "id": 80,
+
+        },
+        {
+          "id": 81,
+
+        },
+        {
+          "id": 82,
+
+        },
+        {
+          "id": 83,
+
+        },
+        {
+          "id": 84,
+        },
+        {
+          "id": 85,
+
+        },
+        {
+          "id": 86,
+        },
+        {
+          "id": 87,
+        },
+        {
+          "id": 88,
+        },
+        {
+          "id": 89,
+        },
+        {
+          "id": 90,
+        },
+        {
+          "id": 91,
+        },
+        {
+          "id": 91,
+        },
+        {
+          "id": 91,
+        },
+        {
+          "id": 91,
+        },
+        {
+          "id": 91,
+        },
+        {
+          "id": 91,
+        }
+      ];
       this.maxItems = Modernizr && Modernizr.touchevents && Modernizr.mq('(max-width: 460px)') ? 2 : 6;
     },
     mounted() {
       this.firstCall.forEach((item, index) => {
-       this.eventsHardCode[index].forEach(_item => {
-          _item.filename = `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`;
+       this.eventsHardCode[index].forEach((_item, index2) => {
+          _item.filename = index === 3 ? `http://checkershosting.s3.amazonaws.com/cbw-2019/77684_CBW_EventImages_${index2+1}_600x600.jpg`: `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`;
         });
         let galleryItem = {
           name: item.event_name,
