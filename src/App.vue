@@ -30,6 +30,9 @@
         events: {
           gallery: []
         },
+        imageStrategy: [
+          ''
+        ],
         index: null,
         eventIndex: 0,
         maxItems: 6,
@@ -61,6 +64,13 @@
             "created_at": "2019-08-07 07:24:30",
             "updated_at": "2019-08-07 09:06:57",
             "event_description": "South Africa’s 2019 Championship Boerewors competition awarded second time winner Olivier Kritzinger the title of SA’s No.1 Boerewors Champion. Kritzinger walked away with prizes worth more than R500 000, including a brand-new Toyota Fortuner 2.4 GD-6 4X4 6AT.  Other finalists crowned during the 27th installment of the competition was last year’s winner, Yvonne Blaauw from Wellington in second place and Jimmy Steenberg, from Despatch in the Eastern Cape, in third place."
+          },
+          {
+            "id": 14,
+            "event_name": "2020",
+            "created_at": "2019-08-07 07:24:30",
+            "updated_at": "2019-08-07 09:06:57",
+            "event_description": "The winner of the Championship Boerewors competition is Delano Jasper (18), making him SA’s No.1 Boerewors Champion! Jasper, from Wellington in the Western Cape, is walking away with this year’s grand prize – a brand-new Toyota Fortuner 2.4 GD-6 RB 6AT. Our other finalists for this year include, Paul Jordaan from Bloemfontein, Free State, in second place and John Marais from Vredendal, Western Cape, taking third place."
           }
         ],
         eventsHardCode: []
@@ -754,12 +764,88 @@
           "id": 91,
         }
       ];
+      this.eventsHardCode[4] = [
+        {
+          "id": 1,
+        },
+        {
+          "id": 2,
+
+        },
+        {
+          "id": 3,
+
+        },
+        {
+          "id": 4,
+
+        },
+        {
+          "id": 5,
+
+        },
+        {
+          "id": 6,
+
+        },
+        {
+          "id": 7,
+
+        },
+        {
+          "id": 8,
+
+        },
+        {
+          "id": 9,
+        },
+        {
+          "id": 10,
+
+        },
+        {
+          "id": 11,
+        },
+        {
+          "id": 12,
+        },
+        {
+          "id": 13,
+        },
+        {
+          "id": 14,
+        },
+        {
+          "id": 15,
+        },
+        {
+          "id": 16,
+        }
+      ];
       this.maxItems = Modernizr && Modernizr.touchevents && Modernizr.mq('(max-width: 460px)') ? 2 : 6;
     },
     mounted() {
       this.firstCall.forEach((item, index) => {
        this.eventsHardCode[index].forEach((_item, index2) => {
-          _item.filename = index === 3 ? `http://checkershosting.s3.amazonaws.com/cbw-2019/77684_CBW_EventImages_${index2+1}_600x600.jpg`: `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`;
+
+         switch (index) {
+           case 0:
+             _item.filename = `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`
+             break
+           case 1:
+             _item.filename = `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`
+             break
+           case 2:
+             _item.filename = `http://ec2-54-161-60-4.compute-1.amazonaws.com/uploads/${_item.filename}`
+             break
+           case 3:
+             _item.filename = `http://checkershosting.s3.amazonaws.com/cbw-2019/77684_CBW_EventImages_${index2+1}_600x600.jpg`
+             break
+           case 4:
+             _item.filename = `http://checkershosting.s3.amazonaws.com/cbw-2020/86918-CBW-Launch-Winner-Image${index2+1}-600x600-DIG1.jpg`
+             break
+         }
+
         });
         let galleryItem = {
           name: item.event_name,
