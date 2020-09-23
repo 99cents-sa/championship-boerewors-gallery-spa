@@ -86,7 +86,7 @@
     },
 
     created() {
-      this.maxItems = Modernizr && Modernizr.touchevents && Modernizr.mq('(max-width: 460px)') ? 2 : 6;
+      this.maxItems = window.innerWidth < 460 ? 2 : 6;
     },
 
     mounted() {
@@ -102,7 +102,7 @@
 
         for (let i = 1; i < item.numberOfImages; i++) {
           galleryItem.items.push({
-            filename: `${process.env.VUE_APP_AEM_PREFIX}/${item.event_name}/${item.event_name}-${i}.jpg`
+            filename: `${process.env.VUE_APP_AEM_PREFIX}/${item.event_name}-${i}.jpg`
           })
         }
 
